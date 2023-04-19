@@ -1,6 +1,8 @@
 package com.crs.cryptorankingsservice.config;
 /* @author - Maftun Hashimli (maftunhashimli@gmail.com)) */
 
+import io.github.dengliming.redismodule.redistimeseries.RedisTimeSeries;
+import io.github.dengliming.redismodule.redistimeseries.client.RedisTimeSeriesClient;
 import org.redisson.config.Config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,13 @@ public class RedisConfig {
     public Config config()
     {
         Config config = new Config();
-        config.useSingleServer();
+        config.useSingleServer()
+                .setAddress(redisUrl);
+        return config;
+    }
+    @Bean
+    public RedisTimeSeries redisTimeSeriesClient(Config config)
+    {
+        return new RedisTimeSeriesClient(config).getRedisTimeSeries();
     }
 }
