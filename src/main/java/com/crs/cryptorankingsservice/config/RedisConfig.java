@@ -20,6 +20,11 @@ public class RedisConfig {
         return config;
     }
     @Bean
+    public RedisTimeSeriesClient redisTimeSeriesClient()
+    {
+        return new RedisTimeSeriesClient(config());
+    }
+    @Bean
     public RedisTimeSeries redisTimeSeriesClient(Config config)
     {
         return new RedisTimeSeriesClient(config).getRedisTimeSeries();
