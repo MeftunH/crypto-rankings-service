@@ -1,6 +1,7 @@
 package com.crs.cryptorankingsservice.config;
 /* @author - Maftun Hashimli (maftunhashimli@gmail.com)) */
 
+import io.github.dengliming.redismodule.redisjson.client.RedisJSONClient;
 import io.github.dengliming.redismodule.redistimeseries.RedisTimeSeries;
 import io.github.dengliming.redismodule.redistimeseries.client.RedisTimeSeriesClient;
 import org.redisson.config.Config;
@@ -28,5 +29,18 @@ public class RedisConfig {
     public RedisTimeSeries redisTimeSeriesClient(Config config)
     {
         return new RedisTimeSeriesClient(config).getRedisTimeSeries();
+    }
+
+    @Bean
+    public RedisJSONClient redisJSONClient()
+    {
+        return new RedisJSONClient(config());
+    }
+
+    @Bean
+    public RedisJSONClient redisJSONClient(RedisJSONClient redisJSONClient)
+    {
+    return redisJSONClient;
+    
     }
 }
